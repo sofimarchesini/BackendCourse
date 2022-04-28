@@ -1,24 +1,28 @@
-import express from 'express';
-import http from 'http';
+const Container = require('./Container.js')
+
+const express = require("express");
 
 const app = express();
 
-const server =  http.createServer((req,res) =>{
-    res.end("Hola soy un servidor")
-})
+const cont = new Container('productos.json')
 
-const PORT = process.env.PORT  || 8080;
+app.use(express.static("public"));
 
-server.listen(PORT,() =>{
-    console.log("Servidor en Puerto 8080")
-})
+app.get('/', (req, res)=>{
+    res.send("En el /productos se veran  los productos y en /productoRandom uno de los productos elegido al azar")
+});
 
 
-/**app.get('/productos',(req,res)=>{
-
+app.get('/productos', (req,res)=>{
+  console.log("mostrando productos")
+  res.send( cont.getAll())
 })
 
 
 app.get('/productoRandom',(req,res)=>{
-    
-})*/
+    res.send(cont.getAll()[Math.floor(Math.random() * cont.getAll().length)])
+})
+
+const listener = app.listen(process.env.PORT, () => {
+  console.log("Your app is listening on port " + listener.address().port);
+});

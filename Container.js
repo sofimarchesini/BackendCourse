@@ -1,4 +1,4 @@
-import fs from 'fs';
+const fs = require('fs');
 
 class Container
 {
@@ -35,7 +35,9 @@ class Container
 
     getById(id) {return this.cont.find(obj => obj.id === id || null)}
 
-    getAll() {return this.cont}
+    getAll() {
+      this.readFile();
+      return this.cont}
 
     deleteById(id){
         var removeIndex = this.cont.map(item => item.id).indexOf(id);
@@ -48,5 +50,5 @@ class Container
     }
 }
 
-export default Container;
 
+module.exports = Container;
