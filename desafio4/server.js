@@ -20,9 +20,10 @@ router.get('/:id', (req, res) => {
     cont.getById(id) ? res.status(200).json(cont.getById(id)) : res.status(404).json({error: "producto no encontrado"});
 })
 
-router.post('/', (req,res) => {
-    const {prod} = req;
-    res.status(200).send("producto agregado")
+router.post('/', async (req,res)  => {
+    const body = req.body;
+    const response = await cont.save(body);
+    res.status(200).send( `producto agregado ${response}`);
 })
 
 router.put('/:id', (req, res) => {

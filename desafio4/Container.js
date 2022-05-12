@@ -25,9 +25,8 @@ class Container
 
     save(prod){
         this.readFile();
-        var contId = 0;
-        for (let i = 0; i < this.cont.length; i++) {contId+=1;}
-        prod["id"] = contId+1;
+        const data =  this.getAll();
+        prod.id =  Math.max(...data.map(prod=>prod.id)) + 1;
         this.cont.push(prod);
         this.writeFile();  
         return prod["id"]
@@ -52,7 +51,6 @@ class Container
     updateProd(id,prod) { 
         if (getById(id)) this.cont[this.cont.findIndex(obj => obj.id === id)] = prod;
         else console.log("error : Product not found")
-        
     }
 }
 
