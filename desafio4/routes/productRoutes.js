@@ -1,14 +1,8 @@
 import express from 'express';
-import Container from './Container.js';
+import Container from '../Container.js';
 
-const app = express();
 const router = express.Router();
 const cont = new Container('productos.json')
-
-app.use(express.static('public'));
-app.use(express.json());
-app.use(express.urlencoded({extended:true}));
-app.use('/api/productos', router);
 
 router.get('/',  (req, res) => {
     console.log("Mostrando productos");
@@ -37,6 +31,4 @@ router.delete('/:id', (req, res) => {
     cont.deleteById(id) ? res.status(200).send("producto borrado") : res.status(404).send("El id es incorrecto");
 })
 
-const server = app.listen(8080, () => {console.log(`server started on port 8080`)})
-
-server.on('error', (err) => console.log(err));
+export default router;
