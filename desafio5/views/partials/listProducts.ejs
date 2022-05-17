@@ -1,0 +1,10 @@
+<div style="margin: 50px 400px">
+    <h1 style="text-align:center">Productos Guardados</h1>
+    <div  >
+      <% productos.forEach(product=> { %>
+        <p class="title is-4"><%=product.title %></p>
+        <p class="subtitle is-6">$ <%=product.price %></p>
+      <% }); %>
+    </div>
+    <button>Volver</button>
+</div>
