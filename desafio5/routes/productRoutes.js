@@ -1,16 +1,28 @@
 import express from 'express';
 import Container from '../Container.js';
+import multer from 'multer';
 
 const router = express.Router();
 const cont = new Container('productos.json')
-const productos = cont.getAll();
 
-router.get('/productos',  (req, res) => {
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'public/img');
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname);
+    }
+   
+  })
+router.use(multer({storage}).single('thumbnail'));
+
+router.get('/',  (req, res) => {
     console.log("Mostrando productos");
-    res.render('./partials/form', {productos});
+    const productos = cont.getAll();
+    res.render('./partials/listProducts', {productos});
 })
 
-router.post('/productos', async (req,res)  => {
+router.post('/',  (req,res)  => {
     const body = req.body;
     cont.save(body);
     res.redirect('/productos');
