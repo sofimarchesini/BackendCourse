@@ -3,11 +3,11 @@ import Container from '../Container.js';
 
 const router = express.Router();
 const cont = new Container('productos.json')
+const productos = cont.getAll();
 
 router.get('/productos',  (req, res) => {
     console.log("Mostrando productos");
-    const productos = cont.getAll();
-    res.render('./partials/listProducts', {productos});
+    res.render('./partials/form', {productos});
 })
 
 router.post('/productos', async (req,res)  => {
@@ -15,8 +15,8 @@ router.post('/productos', async (req,res)  => {
     cont.save(body);
     res.redirect('/productos');
 })
-
 /*
+
 router.get('/:id', (req, res) => {
     const {id} = req.params;
     cont.getById(id) ? res.status(200).json(cont.getById(id)) : res.status(404).json({error: "producto no encontrado"});
