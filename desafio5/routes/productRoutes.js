@@ -5,6 +5,7 @@ import multer from 'multer';
 const router = express.Router();
 const cont = new Container('productos.json')
 
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, 'public/img');
@@ -12,9 +13,10 @@ const storage = multer.diskStorage({
     filename: function (req, file, cb) {
       cb(null, file.originalname);
     }
-   
-  })
-router.use(multer({storage}).single('thumbnail'));
+})
+
+const limits = { fieldSize: 10 * 1024 * 1024 };  
+router.use(multer({storage},{limits} ).single('thumbnail'));
 
 router.get('/',  (req, res) => {
     console.log("Mostrando productos");
@@ -24,6 +26,10 @@ router.get('/',  (req, res) => {
 
 router.post('/',  (req,res)  => {
     const body = req.body;
+    console.log(req.body)
+    const photo = req.file;
+    console.log(req.file)
+    body.thumbnail =  '/img/'+photo.filename;
     cont.save(body);
     res.redirect('/productos');
 })
