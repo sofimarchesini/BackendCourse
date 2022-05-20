@@ -3,7 +3,7 @@ import Container from '../Container.js';
 import multer from 'multer';
 
 const router = express.Router();
-const cont = new Container('productos.json')
+const cont = new Container('./productos.json')
 
 
 const storage = multer.diskStorage({
@@ -21,7 +21,7 @@ router.use(multer({storage},{limits} ).single('thumbnail'));
 router.get('/',  (req, res) => {
     console.log("Mostrando productos");
     const productos = cont.getAll();
-    res.render('./partials/listProducts', {productos});
+    res.render('./partials/productsList/index.ejs', {productos});
 })
 
 router.post('/',  (req,res)  => {
@@ -29,7 +29,7 @@ router.post('/',  (req,res)  => {
     console.log(req.body)
     const photo = req.file;
     console.log(req.file)
-    body.thumbnail =  '/img/'+photo.filename;
+    body.thumbnail =  process.env.PUBLIC_URL+'/img/'+photo.filename;
     cont.save(body);
     res.redirect('/productos');
 })

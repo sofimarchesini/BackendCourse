@@ -24,6 +24,7 @@ class Container
     }
 
     save(prod){
+        console.log(prod)
         this.readFile();
         const data =  this.getAll();
         prod.id =  Math.max(...data.map(prod=>prod.id)) + 1;

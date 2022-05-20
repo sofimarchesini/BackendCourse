@@ -1,7 +1,7 @@
 import express from 'express';
 import productRoutes from './routes/productRoutes.js'
 import morgan from 'morgan';
-
+import path from 'path';
 
 const app = express();
 app.use(morgan('dev'));

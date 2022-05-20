@@ -1,0 +1,83 @@
+.name,.name-2 {
+    font-size: 14px;
+    text-align: center;
+  }
+
+ 
+  .woman-section .grid-container-woman .woman-img {
+    width: 96%;
+    height: auto;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: left;
+  }
+
+  .woman-section .grid-container-woman .button {
+    background-color: white;
+  }
+  
+  @media only screen and (min-width:1700px) {
+    .name {
+      margin-top: 50px;
+    }
+  }
+
+.card-item{
+    border-radius: 1%;
+    transition: transform 0.35s ease-in-out;
+    cursor:pointer;
+    box-shadow:  -10px -10px 8px -6px rgb(219, 219, 219),
+    10px 10px 8px -6px rgb(219, 219, 219),
+    -10px 10px 8px -6px rgb(219, 219, 219),
+    10px -10px 8px -6px rgb(219, 219, 219);
+}
+
+.name{
+  font-size: 16px;
+  display: flex;
+  justify-content: flex-start;
+  text-align: left;
+  color: rgb(59, 59, 59);
+}
+
+.name-2{
+  font-size: 13px;
+  display: flex;
+  justify-content: flex-start;
+  text-align: left;
+  color: rgb(109, 108, 108);
+}
+
+
+
+.card-item:hover {
+  -webkit-transform: scale(1.01);
+  transform: scale(1.02);
+  box-shadow:  -10px -10px 8px -6px rgb(216, 215, 215),
+  10px 10px 8px -6px rgb(204, 204, 204),
+  -10px 10px 8px -6px rgb(212, 211, 211),
+  10px -10px 8px -6px rgb(212, 212, 212);
+
+}
+
+.course-text{
+  display: flex;
+  justify-content: flex-start;
+  color: rgb(61, 99, 202);
+}
+
+.row-1{
+  width: 100%;
+}
+
+.row-2,.row-3,.row-4,.row-1{
+  height: 100%;
+  padding: 10px;
+}
+
+.price{
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 5px;
+}
