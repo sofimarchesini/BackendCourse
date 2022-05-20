@@ -29,7 +29,7 @@ router.post('/',  (req,res)  => {
     console.log(req.body)
     const photo = req.file;
     console.log(req.file)
-    body.thumbnail =  process.env.PUBLIC_URL+'/img/'+photo.filename;
+    body.thumbnail =  '/img/'+photo.filename;
     cont.save(body);
     res.redirect('/productos');
 })
