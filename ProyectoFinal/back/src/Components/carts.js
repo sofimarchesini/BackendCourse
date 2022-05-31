@@ -41,15 +41,19 @@ class Carts
         return this.carts;
     }
 
-    deleteCart(cart){
-        this.carts = ""
-        this.writeFile()
+    deleteCart(cartId){
+        const  obj = this.carts.find(obj => obj.id === cartId || null)
+        if(obj) {
+            this.carts[obj.id] = "";
+            this.writeFile()
+            return obj;
+        }
     }
 
     getAll(cartId) {
         this.readFile();
         const  obj = this.carts.find(obj => obj.id === cartId || null)
-        return obj.productos
+        if(obj) return obj.productos
     }
     
     addProduct(idCart,prod){
@@ -62,10 +66,18 @@ class Carts
     deleteById(cartId,idProd){
         this.readFile();
         const obj = this.carts.find(obj => obj.id === cartId || null)
-        var removeIndex = obj.productos.map(item => item.id).indexOf(idProd)
-        ~removeIndex && obj.productos.splice(removeIndex, 1);  
-        this.writeFile()  
+        if(obj) {
+            if(obj.productos.find(item => item.id == idProd)){
+                var removeIndex = obj.productos.map(item => item.id).indexOf(idProd)
+                ~removeIndex && obj.productos.splice(removeIndex, 1);
+                this.writeFile()  
+                return obj  
+            }
+        }
+        
     }
+
+
 }
 
 export default Carts;

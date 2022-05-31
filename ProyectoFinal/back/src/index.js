@@ -29,6 +29,7 @@ app.set('view engine', 'ejs');
 app.use('/productos', productRoutes);
 app.use('/api/carrito', cartRoutes);
 
+app.use('*', (req, res) => res.status(404).send("Parece que te has perdido"));
 
 
 const messages = []

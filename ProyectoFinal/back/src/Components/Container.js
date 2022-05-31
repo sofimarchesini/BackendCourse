@@ -33,25 +33,40 @@ class Container
         return prod["id"]
     }
 
-    getById(id) {return this.cont.find(obj => obj.id === id || null)}
+    getById(id) {
+        this.readFile();
+        return this.cont.find(obj => obj.id == id || null)
+    }
 
     getAll() {
       this.readFile();
       return this.cont}
 
     deleteById(id){
-        var removeIndex = this.cont.map(item => item.id).indexOf(id);
-        ~removeIndex && this.cont.splice(removeIndex, 1);    
+        try {
+            if (this.getById(id)){
+                this.readFile()
+                let index = this.cont.findIndex(product => product.id == id);
+                if(index >= 0) this.cont.splice(index, 1);
+                this.writeFile() 
+                return id
+            }
+        }catch(err){
+            console.log(err)
+        }
     }
 
     deleteAll() {
+        this.readFile()
         this.cont = ""
         this.writeFile()
     }
 
     updateProd(id,prod) { 
-        if (getById(id)) this.cont[this.cont.findIndex(obj => obj.id === id)] = prod;
+        this.readFile()
+        if (this.getById(id)) this.cont[this.cont.findIndex(obj => obj.id == id)] = prod;
         else console.log("error : Product not found")
+        this.writeFile()
     }
 }
 

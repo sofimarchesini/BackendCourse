@@ -15,7 +15,6 @@ POST: '/:id/productos' - Para incorporar productos al carrito por su id de produ
 DELETE: '/:id/productos/:id_prod' - Eliminar un producto del carrito por su id de carrito y de producto
 */
 
-const listCarts = []; 
 var isAdmin = true;
 
 function isAdminOruser(req,res,next){
@@ -58,30 +57,30 @@ router.post('/:idCart/:idProd/productos',  (req,res)  => {
 router.post('/', isAdminOruser,  (req,res)  => {
     var cart = {}
     var newCartWithId = carts.createAndReturnId(cart);
-    listCarts.push(newCartWithId);
     const productos = carts.getAll(newCartWithId.id)
     res.render('partials/cart/index.ejs', {productos});
 })
 
 //Me va a mostrar los productos del carrito que yo le pase
-router.get('/:id/productos', (req, res) => {
-    const {id} = req.params;
-    const productos = carts.getAll(parseInt(id))
-    res.render('partials/cart/index.ejs', {productos})
+router.get('/:idCart/productos', (req, res) => {
+    const {idCart} = req.params;
+    const productos = carts.getAll(parseInt(idCart))
+    if ( productos ) res.render('partials/cart/index.ejs', {productos})
+    else res.send("No existe tu carrito")
 })
 
 // Elimina todo el carrito que yo le paso
-router.delete('/:id', (req, res) => {
-    const {id} = req.params;
-    const cart = listCarts.find(obj => obj.id === id || null)
-    carts.deleteCart(cart);
-    res.send("Carrito Eliminado")
+router.delete('/:idCart', (req, res) => {
+    const {idCart} = req.params;
+    var cart = carts.deleteCart(parseInt(idCart));
+    cart ? res.send("Carrito Eliminado") : res.send("No existia el carrito que quieres eliminar")
 })
 
 //Elimina de un carrito especifico un producto especifico
 router.delete('/:idCart/productos/:id_prod', (req, res) => {
     const {idCart, id_prod} = req.params;
-    carts.deleteById(parseInt(idCart),parseInt(id_prod))
+    if (carts.deleteById(parseInt(idCart),parseInt(id_prod))) res.send("Producto eliminado")
+    else res.send("no existia el carrito o el producto que quieres eliminar")
 })
 
 
