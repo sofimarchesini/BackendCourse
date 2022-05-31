@@ -8,6 +8,8 @@ import { Server } from "socket.io";
 import { fileURLToPath } from 'url';
 import Container from './Components/Container.js';
 
+//PARARSE EN BACK Y CORRER CON NPM START 
+
 const cont = new Container("./src/data/productos.json")
 const app = express();
 const httpServer = createServer(app);
