@@ -10,30 +10,28 @@ const query = db.collection('productos')
 
 class ContainerFirebase {
 	
+    async deleteById(id) { await query.doc(id).delete() }
+
     async getById(id) {
-		const document = await query.doc(id).get()
-		return document.data()
+		const doc = await query.doc(id).get()
+		return doc.data()
 	}
 
-	async deleteById(id) {
-		await query.doc(id).delete()
+    async save(newProduct) {    
+		const prod = await query.add(newProduct)
+		object.id = prod.id
+		query.doc(prod.id).set(newProduct)
+		return prod.id
 	}
 
-	async updateById(id, newData) {	
-		newData.id = id
-		await query.doc(id).set(newData)
-	}
-
-	async save(object) {    
-		const product = await query.add(object)
-		object.id = product.id
-		query.doc(product.id).set(object)
-		return product.id
+	async updateById(id, data) {	
+		data.id = id
+		await query.doc(id).set(data)
 	}
 
 	async getAll() {
-		const snapshot = await query.get()
-    	return snapshot.docs.map(doc => doc.data());
+		const all = await query.get()
+    	return all.docs.map(doc => doc.data());
 	}
 }
 
