@@ -8,9 +8,7 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 import { fileURLToPath } from 'url';
 import Container from './Components/Container.js';
-import knex from 'knex';
-import { prodTable, CartTable } from './tables.js';
-
+import mongoose  from 'mongoose';
 //PARARSE EN BACK Y CORRER CON NPM START 
 
 const cont = new Container("./src/data/productos.json")
@@ -20,7 +18,6 @@ const io = new Server(httpServer);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 
 //middlewares
 app.use(morgan('dev'));
@@ -41,6 +38,21 @@ app.use('*', (req, res) => res.status(404).send("Parece que te has perdido"));
 const messages = []
 const products = []
 
+//Probando data de MONGODB
+const URL = "mongodb+srv://sofimarchesini:coderhouse@cluster0.02dbrc3.mongodb.net/productos?retryWrites=true&w=majority"
+
+const prods = new mongoose.Schema({
+    nombre:{type:String}
+})
+
+const prodsModel = mongoose.model('productos',prods)
+
+mongoose.connect(URL,{
+    useNewUrlParser: true,
+    UseUnifiedTopology:true
+})
+
+//Probando SOCKET
 io.on('connection', (socket) =>{
     console.log('mostrando productos en tiempo real');
     socket.on('newProduct', product => {
