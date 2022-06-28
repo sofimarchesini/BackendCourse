@@ -1,6 +1,6 @@
 import Container from '../Components/Container.js';
 
-class CarritosDaosMongo extends Container{
+class Carritos extends Container{
 
     constructor(){
         super('../data/Carritos.json')
@@ -9,4 +9,4 @@ class CarritosDaosMongo extends Container{
     async desconectar(){}
 }
 
-export default CarritosDaosMongo
+export default Carritos
