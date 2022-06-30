@@ -9,6 +9,10 @@ import { Server } from "socket.io";
 import { fileURLToPath } from 'url';
 import Container from './Components/Container.js';
 import mongoose  from 'mongoose';
+import dotenv from 'dotenv';
+import {normalize, schema} from "normalizr";
+dotenv.config();
+
 //PARARSE EN BACK Y CORRER CON NPM START 
 
 const cont = new Container("./src/data/productos.json")
@@ -38,16 +42,14 @@ app.use('*', (req, res) => res.status(404).send("Parece que te has perdido"));
 const messages = []
 const products = []
 
-//Probando data de MONGODB
-const URL = "mongodb+srv://sofimarchesini:coderhouse@cluster0.02dbrc3.mongodb.net/productos?retryWrites=true&w=majority"
+//Probando data de MONGODB"
+let URL_MONGO = "mongodb+srv://sofimarchesini:" + process.env.PASSWORD + "@cluster0.02dbrc3.mongodb.net/productos?retryWrites=true&w=majority"
 
 const prods = new mongoose.Schema({
     nombre:{type:String}
 })
 
-const prodsModel = mongoose.model('productos',prods)
-
-mongoose.connect(URL,{
+mongoose.connect(URL_MONGO,{
     useNewUrlParser: true,
     UseUnifiedTopology:true
 })
@@ -61,6 +63,7 @@ io.on('connection', (socket) =>{
     })
 })
 
+const holding = {}
 
 io.on('connection', (socket) =>{
     console.log('usuario conectado');
@@ -69,7 +72,9 @@ io.on('connection', (socket) =>{
         var date = new Date()
         data["date"] = date;
         messages.push(data);
-        socket.emit('messages',messages);
+        const mensajesSchema = new schema.Entity("messages");
+        const mensajesSchemaNormalize = normalize(holding, mensajesSchema)
+        socket.emit('messages',mensajesSchemaNormalize);
     })
 })
 

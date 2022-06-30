@@ -26,6 +26,14 @@ const storage = multer.diskStorage({
 const limits = { fieldSize: 10 * 1024 * 1024 };  
 router.use(multer({storage},{limits} ).single('thumbnail'));
 
+
+router.get('/productos-test',  (req, res) => {
+    console.log("Mostrando productos");
+    const productos = contDB.aleatoryProducts(5);
+    res.render('index.ejs', {productos});
+})
+
+
 //Listo todos los productos
 router.get('/',  (req, res) => {
     console.log("Mostrando productos");

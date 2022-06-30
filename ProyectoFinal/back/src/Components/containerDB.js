@@ -1,4 +1,6 @@
 import knex from 'knex'
+import {faker} from "@faker-js/faker/locale/es";
+
 
 class ContainerDB
 {
@@ -17,6 +19,21 @@ class ContainerDB
     deleteById(id){ this.objectKnex.from(this.table).select('*').where('id',id).del()}
     
     deleteAll() { this.objectKnex.from(this.table).del(); }
+
+    aleatoryProducts(cant) {
+        let aleatoryProducts = []
+        for(let i=0; i<cant; i++){
+            let prod = {
+                name : faker.commerce.productName(),
+                price : faker.commerce.price(),
+                description : faker.lorem.paragraph(),
+                image: faker.image.image()
+            }
+            saveProd = this.save(prod);
+            aleatoryProducts.push(saveProd);
+        }
+        return aleatoryProducts;
+    }
 
 }
 export default ContainerDB;

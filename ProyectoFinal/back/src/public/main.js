@@ -61,9 +61,22 @@ socket.on("products",(products)=>{
 })
 
 buttonChat.addEventListener("click", (event) =>{
-    const author = document.querySelector("#email").value
+    const email = document.querySelector("#email").value
     const text = document.querySelector("#textToSend").value
-    const message = {"author":author, "text": text};
+    const age = document.querySelector("#age").value
+    const name = document.querySelector("#name").value
+    const lastName = document.querySelector("#lastName").value
+    const alias = document.querySelector("#alias").value
+    const avatar = document.querySelector("#avatar").value
+    const message = {"author":{
+                    "id": email,
+                    "age": age,
+                    "name": name,
+                    "lastName": lastName,
+                    "alias": alias,
+                    "avatar": avatar 
+                }, "text": text};
+                
     socket.emit("newMessage",message);
 })
 
