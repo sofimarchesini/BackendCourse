@@ -11,7 +11,8 @@ router.post("/session", (req, res) => {
     for(let key in req.body) {
         if(req.body[key]) { req.session[key] = req.body[key]; }
     }
-  res.send({session: req.session});
+    let name = req.body.name
+    res.render('bienvenida/index.ejs', {name});
 });
 
 export default router;
