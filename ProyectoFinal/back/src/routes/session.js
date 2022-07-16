@@ -1,18 +1,41 @@
 import { Router } from "express";
-
+const usuarios = [];
 const router = Router();
 
-router.get("/", (req, res) => {
-    res.render("session");
+router.get("/registro", (req, res) => {
+    res.render("registro");
 });
 
-router.post("/session", (req, res) => {
-    console.log(req.body);
-    for(let key in req.body) {
-        if(req.body[key]) { req.session[key] = req.body[key]; }
+router.get('/',(req,res)=>{res.render("login")})
+
+router.post('/registro',(req,res)=>{
+    if(usuarios.some(user=>user.nombre===req.body.nombre)){
+        return res.render('errorRegistro.ejs')
     }
-    let name = req.body.name
-    res.render('bienvenida/index.ejs', {name});
-});
+    usuarios.push(req.body)
+    res.render('login')
+})
 
-export default router;
+router.post('/login',(req,res)=>{
+    const {nombre,password} = req.body
+    const usuario  = usuarios.find(usuario=>usuario.nombre===nombre)
+    if(usuario && usuario.password===password){
+        for (const key in req.body) {
+            req.session[key] = req.body[key]  
+        }
+        res.redirect('/datos')
+    } else res.render('errorLogin')
+})
+
+router.get('/datos',(req,res)=>{
+    if(req.session.nombre){
+        res.render('bienvenida/index.ejs',{nombre:req.session.nombre})
+    }
+})
+
+router.get('/logout',(req,res)=>{
+    req.session.destroy(err=>{res.redirect('/')})
+})
+
+
+export default router

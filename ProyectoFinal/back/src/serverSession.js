@@ -3,10 +3,11 @@ import session from "express-session";
 import sessionRoute from "./routes/session.js";
 import { fileURLToPath } from 'url';
 import path from 'path';
+import sessionFileStore from 'session-file-store';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
+const filestore  = sessionFileStore(session)
 //TO RUN TRY : npm run startSession
 const app = express();
 
