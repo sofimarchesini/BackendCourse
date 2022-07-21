@@ -3,17 +3,17 @@ const usuarios = [];
 const router = Router();
 
 router.get("/registro", (req, res) => {
-    res.render("registro");
+    res.render("SessionCookies/registro");
 });
 
 router.get('/',(req,res)=>{res.render("login")})
 
 router.post('/registro',(req,res)=>{
     if(usuarios.some(user=>user.nombre===req.body.nombre)){
-        return res.render('errorRegistro.ejs')
+        return res.render('SessionCookies/errorRegistro.ejs')
     }
     usuarios.push(req.body)
-    res.render('login')
+    res.render('SessionCookies/login')
 })
 
 router.post('/login',(req,res)=>{
@@ -24,12 +24,12 @@ router.post('/login',(req,res)=>{
             req.session[key] = req.body[key]  
         }
         res.redirect('/datos')
-    } else res.render('errorLogin')
+    } else res.render('SessionCookies/errorLogin')
 })
 
 router.get('/datos',(req,res)=>{
     if(req.session.nombre){
-        res.render('bienvenida/index.ejs',{nombre:req.session.nombre})
+        res.render('SessionCookies/bienvenida/index.ejs',{nombre:req.session.nombre})
     }
 })
 
