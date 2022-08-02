@@ -6,6 +6,8 @@
   "scripts": {
     "start": "nodemon --exec  babel-node  ./src/index.js",
     "startSession": "nodemon serverSession.js",
+    "fork":"nodemon src/serverNginx.js fork",
+    "cluster":"nodemon src/serverNginx.js cluster",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
