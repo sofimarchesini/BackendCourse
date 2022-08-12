@@ -4,7 +4,7 @@
   "main": "./src/serverSession.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon --exec  babel-node  ./src/index.js",
+    "start": "node  ./src/index.js",
     "startSession": "nodemon serverSession.js",
     "fork":"nodemon src/serverNginx.js fork",
     "cluster":"nodemon src/serverNginx.js cluster",
