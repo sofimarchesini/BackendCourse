@@ -6,7 +6,7 @@ router.get("/registro", (req, res) => {
     res.render("SessionCookies/registro");
 });
 
-router.get('/',(req,res)=>{res.render("login")})
+router.get('/',(req,res)=>{res.render("SessionCookies/login")})
 
 router.post('/registro',(req,res)=>{
     if(usuarios.some(user=>user.nombre===req.body.nombre)){
