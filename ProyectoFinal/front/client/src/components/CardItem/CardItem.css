@@ -1,0 +1,125 @@
+.woman-section {
+  text-align: center;
+  background-color: rgb(255, 255, 255);
+  height: 100%;
+  margin-bottom: 100px;
+}
+@media only screen and (max-width: 768px) {
+  .woman-section {
+    width: 100%;
+    text-align: center;
+    height: 100%;
+  }
+}
+.woman-section .link-view-all {
+  border-bottom: 2px black solid;
+  border: none;
+}
+
+.section-text {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: none;
+  justify-content: flex-start;
+  padding-top: 140px;
+  font-size: 25px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  margin-left: 300px;
+  color: #000;
+}
+
+.woman-section .link-view-all:hover {
+  color: grey;
+}
+.woman-section .grid-container-woman, .woman-section .grid-container-woman > * {
+  width: 100%;
+}
+.woman-section .grid-container-woman > * {
+  height: 100%;
+  padding: 0;
+  background-color: white;
+  
+}
+.woman-section .grid-container-woman {
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 50px 40px;
+  margin: 50px 0;
+  padding: 0 270px;
+}
+@media only screen and (max-width: 945px) {
+  .woman-section .grid-container-woman {
+    padding: 0;
+  }
+}
+@media only screen and (max-width: 2000px) {
+  .woman-section .grid-container-woman {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 40px 40px;
+    margin: 50px 0;
+    padding: 0 300px;
+  }
+}
+ .name,.name-2 {
+  font-size: 12px;
+  text-align: center;
+  cursor:pointer;
+}
+
+
+.woman-section .grid-container-woman .woman-img {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: left;
+}
+
+.woman-section .grid-container-woman .button {
+  background-color: white;
+}
+
+
+.card-item{
+  border-radius: 1%;
+  border: 1px solid rgb(238, 238, 238);
+  transition: transform 0.35s ease-in-out;  
+}
+
+.name{
+font-size: 12px;
+color: rgb(59, 59, 59);
+}
+
+.name:hover{
+  text-decoration: underline;
+}
+
+.name-2{
+font-size: 13px;
+color: rgb(109, 108, 108);
+}
+
+.course-text{
+display: flex;
+justify-content: flex-start;
+color: rgb(61, 99, 202);
+}
+
+.row-1{
+width: 100%;
+padding: 8px;
+
+}
+
+.row-2{
+margin-top: 5px;
+font-size: 14px;
+padding: 8px;
+}
+
+
+

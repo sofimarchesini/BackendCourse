@@ -1,0 +1,40 @@
+
+
+.fila-inicial-about{
+    height: 100px;
+}
+
+.img-about{
+    width: 80%;
+    margin-top:200px ;
+    margin-left: 200px;
+}
+
+.about-text{
+    font-size: 30px;
+    margin-top: 30px;
+}
+
+.cont-text{
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 100px;
+    margin-bottom: 100px;
+    margin-top: 50px;
+}
+
+.about-cont{
+    height: 100%;
+}
+
+.text{
+    font-size: 18px;
+    margin-top:10px;
+}
+
+.cont-square{
+    margin: 50px 300px;
+    background-color: rgb(241, 241, 241);
+    border: 1px solid rgb(180, 180, 180) ;
+    margin-bottom: 200px;
+}
