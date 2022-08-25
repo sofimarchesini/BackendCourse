@@ -1,0 +1,40 @@
+
+<div class="container-fluid " style="margin-bottom: 200px;">
+  <h1 style="text-align:center; padding: 50px;">Productos Guardados</h1>
+
+  <div id= "productos"class="container  is-flex is-justify-content-space-between is-flex-wrap-wrap card-columns ">
+    <% if (productos.length != 0) { %>
+      <% productos.forEach(product=> { %>
+        <div class="card" style="width: 350px; margin: 30px">
+          <div class="row">
+            <div class="col-7">
+              <div class="card-image" style="padding: 15px">
+                <figure class="image is-4by3">
+                  <img style="width:100%" src="<%= product.thumbnail %>" alt="Placeholder image" />
+                </figure>
+              </div>
+
+            </div>  
+            <div class="col-3">
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-content">
+                    <p class="title is-4 name"><%=product.title %></p>
+                    <p class="subtitle is-6">$<%=product.price %></p>
+                    <p class="subtitle is-6"><%=product.description %></p>
+                    <p class="subtitle is-6"><%=product.timestamp %></p>
+                    <p class="subtitle is-6"><%=product.stock %></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% }); %>
+
+    <% } %>
+    <% if (productos.length == 0) { %>
+      <div style=" text-align: center">No products</div>
+    <% } %>
+  </div>
+</div>

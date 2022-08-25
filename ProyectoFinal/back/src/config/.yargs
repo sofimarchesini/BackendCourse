@@ -1,0 +1,7 @@
+import yargs from "yargs";
+
+const args = yargs
+  .alias({ m: "mode", p: "port", d: "debug" })
+  .default({ m: "dev", p: 8000, d: false }).argv;
+
+console.log(args);
