@@ -1,12 +1,11 @@
-import logger from "../../utils/winston.js";
-import ProductsRepo from './container.js';
+import ProductsRepo from '../Persistencia/Contenedores/containerProductsDao.js';
 
 export async function getProducts(req, res) {
     try {
       const products = await ProductsRepo.getAll();
       res.json({ products });
     } catch (error) {
-      logger.error(`Error al listar productos. ${error}`);
+      console.log(`Error al listar productos. ${error}`);
       return res.status(500).json({ error_description: 'Error del servidor.' });
     }
   }
@@ -24,7 +23,7 @@ export async function getProducts(req, res) {
       res.cookie('id', product._id);
       res.render('product', { product });
     } catch (error) {
-      logger.error(`Error al obtener producto. ${error}`);
+      console.log(`Error al obtener producto. ${error}`);
       return res.status(500).json({ error_description: 'Error del servidor.' });
     }
   }
@@ -36,7 +35,7 @@ export async function getProducts(req, res) {
   
       return res.status(201).json({ product: newProduct });
     } catch (error) {
-      logger.error(`Error al crear producto. ${error}`);
+      console.log(`Error al crear producto. ${error}`);
       return res.status(500).json({ error_description: 'Error del servidor.' });
     }
   }
@@ -56,7 +55,7 @@ export async function getProducts(req, res) {
         .status(400)
         .json({ error_description: 'Producto no encontrado.' });
     } catch (error) {
-      logger.error(`Error al actualizar producto. ${error}`);
+      console.log(`Error al actualizar producto. ${error}`);
       return res.status(500).json({ error_description: 'Error del servidor.' });
     }
   }
@@ -71,7 +70,7 @@ export async function getProducts(req, res) {
       }
       res.json({ product });
     } catch (error) {
-      logger.error(`Error al borrar producto. ${error}`);
+      console.log(`Error al borrar producto. ${error}`);
       return res.status(500).json({ error_description: 'Error del servidor.' });
     }
   }
@@ -84,7 +83,7 @@ export async function getProducts(req, res) {
       ProductsRepo.addProductToCart(productId, quantity, user);
       res.redirect('/');
     } catch (error) {
-      logger.error(`Error al agregar producto carrito. ${error}`);
+      console.log(`Error al agregar producto carrito. ${error}`);
       return res.status(500).json({ error_description: 'Error del servidor.' });
     }
   }
