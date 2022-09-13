@@ -1,5 +1,5 @@
-import productDaoFactory from '../daos/productDaoFactory.js';
-const productsDao = productDaoFactory.getDao();
+import ProductDAOFactory from '../productDaoFactory.js';
+const productsDao = ProductDAOFactory.get("MEM");
 
 class ContainerProductsDao {
   async getAll() {

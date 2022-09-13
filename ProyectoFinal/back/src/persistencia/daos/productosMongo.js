@@ -1,13 +1,12 @@
-import MongoClass from "../Controllers/MongoClass.js.js.js";
-import Products from "../../schemas/productoSchema.js";
+import productosSchema from "../../schemas/productoSchema.js";
 
-class ProductoDaoMongo extends MongoClass {
+class ProductoDaoMongo  {
     
-    constructor() { super("productos", Products); }
+    constructor() { ("productos", productosSchema); }
 
     async get(id) {
         try {
-            return await Products.findById(id);
+            return await productosSchema.findById(id);
         } catch (error) {
             logger.error(`error al buscar producto en la db . ${error}`)
         }
@@ -15,7 +14,7 @@ class ProductoDaoMongo extends MongoClass {
 
     async getAll(query = {}) {
         try {
-            return await Products.find(query);
+            return await productosSchema.find(query);
         } catch (error) {
             logger.error(`error al buscar los productos en la db . ${error}`)
         }
@@ -23,7 +22,7 @@ class ProductoDaoMongo extends MongoClass {
 
     async create(product) {
         try {
-            return await Products.create(product);
+            return await productosSchema.create(product);
         } catch (error) {
             logger.error(`error al crear producto en la db. ${error}`)
         }
@@ -31,7 +30,7 @@ class ProductoDaoMongo extends MongoClass {
 
     async update(id, updatedProduct) {
         try {
-            return await Products.findByIdAndUpdate(id, updatedProduct);
+            return await productosSchema.findByIdAndUpdate(id, updatedProduct);
         } catch (error) {
             logger.error(`error al actualizar producto en la db. ${error}`)
         }
@@ -39,7 +38,7 @@ class ProductoDaoMongo extends MongoClass {
 
     async delete(id) {
         try {
-            return await Products.findByIdAndDelete(id);
+            return await productosSchema.findByIdAndDelete(id);
         } catch (error) {
             logger.error(`error al borrar producto en la db . ${error}`)
         }

@@ -3,7 +3,7 @@ import productosFirebase from './daos/productosArchivo.js';
 import productosArchivo from './daos/productosArchivo.js';
 
 class ProductDAOFactory{
-    static get(type) {
+    get(type) {
         switch(type) {
             case 'MEM': return new productosFirebase()
             case 'FILE': return new productosArchivo()
