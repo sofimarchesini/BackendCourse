@@ -6,16 +6,16 @@ import morgan from 'morgan';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
-import routerRandom from './routes/randomRoutes.js'
 import session from "express-session";
-import sessionRoute from "./routes/session.js";
 import cookieParser from "cookie-parser";
-import cookiesRoute from "./routes/cookies.js";
 import userRoutes from "./routes/userRoutes.js";
 import mongoose from 'mongoose';
 import './utils/passport.js';
 import passport from "passport";
 import cors from "cors";
+import { graphqlHTTP } from "express-graphql";
+import schema from './GraphQl/schema.js'
+
 
 dotenv.config();
 const app = express();
@@ -53,6 +53,10 @@ app.use(cookieParser());
 app.use('/', userRoutes)
 app.use('/api/carrito', cartRoutes)
 app.use('/productos', productRoutes)
+app.use ('/graphql', graphqlHTTP({
+    graphiql: true,
+    schema: schema
+}));
 
 /**app.use('/productos', productRoutes);
 app.use('/api/carrito', cartRoutes);
