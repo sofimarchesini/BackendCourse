@@ -1,37 +1,55 @@
 import mongoose from "mongoose";
-import config from "../config.js.js";
 
-mongoose.connect(config.mongoDB.URL, config.mongoDB.options);
+class MongoClass {
+  constructor(collectionName, docSchema) {
+    this.collection = mongoose.model(collectionName, docSchema);
+  }
 
-class ContainerMongo {
-    constructor(collection, schema) {
-        this.collection = mongoose.model(collection, schema)
+  async getAll() {
+    try {
+      const all = await this.collection.find({});
+      return all;
+    } catch (err) {
+      throw new Error(err);
     }
+  }
 
-    async save(prod) { this.collection.create(prod) }
-
-    async getAll() { return  this.collection.find({})}
-
-    async getById(id) {
-        try{
-            const prod = await this.collection.findById(id)
-            return prod
-        }catch(err){ throw new Error(err) }
+  async getOne(id) {
+    try {
+      const one = await this.collection.findById(id);
+      return one;
+    } catch (err) {
+      throw new Error(err);
     }
+  }
 
-    async updatebyId(id, prod) {
-        try{
-            const newprod = await this.collection.findByIdAndUpdate(id, prod)
-            return newprod
-        }catch(err){ throw new Error(err)  }
+  async create(doc) {
+    console.log(doc);
+    try {
+      const newDoc = await this.collection.create(doc);
+      return newDoc;
+    } catch (err) {
+      throw new Error(err);
     }
+  }
 
-    async deleteById(id) {
-        try{
-            const deletedDoc = await this.collection.findByIdAndDelete(id)
-            return deletedDoc
-        }catch(err){ throw new Error(err) }
+  async update(id, doc) {
+    try {
+      const updatedDoc = await this.collection.findByIdAndUpdate(id, doc);
+      return updatedDoc;
+    } catch (err) {
+      throw new Error(err);
     }
+  }
+
+  async delete(id) {
+    try {
+      const deletedDoc = await this.collection.findByIdAndDelete(id);
+      return deletedDoc;
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
 }
 
-export default ContainerMongo;
+export default MongoClass;

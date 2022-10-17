@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
-const cartItemSchema = new mongoose.Schema({
+let cartItemSchema;
+export default cartItemSchema = new mongoose.Schema({
     product:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'productos',
@@ -8,4 +9,3 @@ const cartItemSchema = new mongoose.Schema({
     quantity:{type: Number, require: true, trim: true}
 });
 
-export default cartItemSchema;

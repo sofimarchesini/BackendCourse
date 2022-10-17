@@ -1,31 +1,22 @@
-import ProductDAOFactory from '../productDaoFactory.js';
-const productsDao = ProductDAOFactory.get("MEM");
+import dotenv from "dotenv";
+dotenv.config();
 
-class ContainerProductsDao {
-  async getAll() {
-    return await productsDao.getAll();
-  }
-  async get(id) {
-    return await productsDao.get(id);
-  }
-  async create(product) {
-    return await productsDao.create(product);
-  }
-  async update(id, updatedProduct) {
-    return await productsDao.update(id, updatedProduct);
-  }
-  async delete(id) {
-    return await productsDao.delete(id);
-  }
-  async addProductToCart(productId, quantity, user){
-    const productToAdd = {
-      product: productId,
-      quantity,
-    };
-    user.cart.push(productToAdd);
-    user.save();
+let productosDao;
+let carritosDao;
+let usuariosDao;
 
-  }
+switch (process.env.DB_CONNECTION) {
+  case "mongoDB":
+    import("../daos/productosMongo.js").then(({ MongoDBProductos }) => {
+      productosDao = new MongoDBProductos();
+    });
+    import("../daos/carritoMongo.js").then(({ MongoDBCarritos }) => {
+      carritosDao = new MongoDBCarritos();
+    });
+    break;
+
+  default:
+    throw new Error("No se ha definido una conexión a la base de datos");
 }
 
-export default new ContainerProductsDao();
+export { productosDao, carritosDao, usuariosDao };

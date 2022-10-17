@@ -1,30 +1,25 @@
 import mongoose from "mongoose";
 
-const productosSchema = new mongoose.Schema({
+let productosSchema;
+export default productosSchema = new mongoose.Schema({
     nombre: {
-        type: String,
-        required: true
+        type: String
     },
     descripcion: {
-        type: String,
+        type: String
     },
     codigo: {
-        type: String,
-        required: true
+        type: String
     },
     thumbnail: {
-        type: String,
-        required: true
+        type: String
     },
     precio: {
         type: Number,
-        default: 0,
-        required: true
+        default: 0
     },
     stock: {
         type: Number,
         default: 0
     }
 });
-
-export default productosSchema;

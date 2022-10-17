@@ -1,8 +1,8 @@
-import ProductsRepo from '../Persistencia/Contenedores/containerProductsDao.js';
+import { productosDao } from '../persistencia/contenedores/containerProductsDao.js';
 
 export async function getProducts(req, res) {
     try {
-      const products = await ProductsRepo.getAll();
+      const products = await productosDao.getAll();
       res.json({ products });
     } catch (error) {
       console.log(`Error al listar productos. ${error}`);
@@ -13,7 +13,7 @@ export async function getProducts(req, res) {
   export async function getProduct(req, res) {
     try {
       const id = req.params.id;
-      const product = await ProductsRepo.get(id);
+      const product = await productosDao.get(id);
   
       if (!product)
         return res
@@ -31,7 +31,7 @@ export async function getProducts(req, res) {
   export async function createProduct(req, res) {
     try {
       const product = req.body;
-      const newProduct = await ProductsRepo.create(product);
+      const newProduct = await productosDao.create(product);
   
       return res.status(201).json({ product: newProduct });
     } catch (error) {
@@ -44,7 +44,7 @@ export async function getProducts(req, res) {
     try {
       const updatedProduct = req.body;
       const id = req.params.id;
-      if (await ProductsRepo.update(id, updatedProduct)) {
+      if (await productosDao.update(id, updatedProduct)) {
         const product = {
           _id: id,
           ...updatedProduct,
@@ -62,7 +62,7 @@ export async function getProducts(req, res) {
   
   export async function deleteProduct(req, res) {
     try {
-      const product = await ProductsRepo.delete(req.params.id);
+      const product = await productosDao.delete(req.params.id);
       if (!product) {
         return res
           .status(400)
@@ -80,7 +80,7 @@ export async function getProducts(req, res) {
       const productId = req.cookies.id;
       const { quantity } = req.body;
       const user = req.user;
-      ProductsRepo.addProductToCart(productId, quantity, user);
+      productosDao.addProductToCart(productId, quantity, user);
       res.redirect('/');
     } catch (error) {
       console.log(`Error al agregar producto carrito. ${error}`);

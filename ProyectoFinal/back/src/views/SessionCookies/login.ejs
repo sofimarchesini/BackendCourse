@@ -13,9 +13,13 @@
 <body>
     <h1 style="text-align:center; margin-top: 50px;"> Ingrese Sesion</h1>
     <form style="text-align:center; margin-top: 50px;" action="/session" method="post">
-        <input type="name" name="name" placeholder="Ingresa tu Nombre">
-        <input type="password" name="password" placeholder="Ingresa tu password">
-        <button type="submit">Ingresar</button>
+        <div style="padding: 15px" class="row">        
+            <input type="name" name="name" placeholder="Ingresa tu Nombre">
+        </div>
+        <div style="padding: 15px" class="row">        
+            <input type="password" name="password" placeholder="Ingresa tu password">
+        </div>
+        <button class="btn btn-success my-3 submit" type="submit">Iniciar sesión</button>
     </form>
 
     <h2 style="text-align:center; margin-top: 50px;">Eres nuevo? Registrate</h2>

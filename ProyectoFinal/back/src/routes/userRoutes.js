@@ -11,7 +11,7 @@ dotenv.config();
 const router = Router();
 
 router.get("/", (req, res) => {
-    res.render("SessionCookies/registro");
+    res.render("SessionCookies/login");
   });
   
 router.post("/registro",  multer.single('photo'), async (req, res) => {

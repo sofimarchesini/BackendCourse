@@ -12,17 +12,37 @@
     <div style="text-align: center;margin-top:130px">
         <h1>REGISTRO</h1>
         <form action="/registro" method="post">
-        <input type="text" name="nombre" placeholder="Ingresa tu usuario" />
-        <input type="email" name="email" placeholder="Ingresa tu correo" />
-        <input
-            type="password"
-            name="password"
-            placeholder="Ingresa tu contrasena"
-        />
-        <input type="tel" name="telefono" placeholder="Telefono">
-        <input type="text" name="mensaje" placeholder="Escribe tu Mensaje">
-        <input id="photo" name='photo' placeholder="foto" class="form-control" type="file" required>
-        <button onclick="location.href = '/login'"></button>>Enviar</button>
+          <div class="row" style="padding: 15px">          
+            <input type="text" name="nombre" placeholder="Ingresa tu usuario" />
+          </div>
+          <div class="row" style="padding: 15px"> 
+            <input type="email" name="email" placeholder="Ingresa tu correo" />
+          </div>
+
+          <div class="row" style="padding: 15px"> 
+            <input
+                type="password"
+                name="password"
+                placeholder="Ingresa tu contrasena"
+            />
+          </div>
+          <div class="row" style="padding: 15px"> 
+            <input
+                type="password"
+                name="password"
+                placeholder="Ingresa tu contrasena nuevamente"
+            />
+          </div>
+          <div class="row" style="padding: 15px"> 
+            <input type="tel" name="telefono" placeholder="Telefono">
+          </div>
+          <div class="row" style="padding: 15px"> 
+            <input type="text" name="mensaje" placeholder="Escribe tu Mensaje">
+          </div>
+          
+          <div class="row" style="padding: 15px"> 
+              <button onclick="location.href = '/login'">Enviar</button>
+          </div>
         </form>
     </div>
   </body>
